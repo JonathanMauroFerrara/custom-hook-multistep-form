@@ -35,9 +35,16 @@ const initialData: FormData = {
 
 function App() {
   const [userData, setUserData] = useState(initialData);
-  const { step, steps, currentStepIndex, isFirstStep, isLastStep, nextStep, prevStep, goTo} = useMultiStepForm([<UserForm {...data} />, <AddressForm {...data} />, <AccountForm {...data} />])
+  const { step, steps, currentStepIndex, isFirstStep, isLastStep, nextStep, prevStep, goTo} = useMultiStepForm([
+  <UserForm {...initialData} updateFields={updateFields} />,
+  <AddressForm {...initialData} updateFields={updateFields} />,
+  <AccountForm {...initialData} updateFields={updateFields} />])
   
-
+  function updateFields(fields: Partial<FormData>){
+    setUserData(prev =>{
+      return{...prev, ...fields}
+    })   
+  }
   function handleSubmit(e: FormEvent){
     e.preventDefault();
     nextStep()

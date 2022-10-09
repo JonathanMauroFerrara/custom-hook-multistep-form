@@ -1,13 +1,17 @@
 import { FormWrapper } from "./FormWrapper";
 
-type UserFormProps = {
+type UserData = {
   name: string,
   surname: string,
   email: string,
   phone: string
 }
 
-export function UserForm({name, surname, email, phone}: UserFormProps){
+type UserFormProps = UserData & {
+  updateFields: (fields: Partial<UserData>) => void
+}
+
+export function UserForm({name, surname, email, phone, updateFields}: UserFormProps){
     return(
         <FormWrapper title="User Information">
           <label>Name</label>

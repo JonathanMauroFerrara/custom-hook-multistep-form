@@ -1,13 +1,17 @@
 import { FormWrapper } from "./FormWrapper";
 
-type AddressFormProps = {
+type UserData = {
   state: string
   city: string
   postalCode: string
   address: string
 }
 
-export function AddressForm({state, city, postalCode, address}: AddressFormProps){
+type AddressFormProps = UserData & {
+  updateFields: (fields: Partial<UserData>) => void
+}
+
+export function AddressForm({state, city, postalCode, address, updateFields}: AddressFormProps){
     return(
         <FormWrapper title="Address Information">
           <label>State/Province</label>
